@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    box-sizing: border-box;
+    background-color:darkslategrey;
+    padding: 20px 150px;
+}
+.btn-cart{
+    padding: 10px;
+    margin-left: auto;
+    margin-right: 0;
+display: block;
+
+}
+.products{
+    padding: 30px 150px;
+    display: flex;
+    justify-content: space-between;
+}
+.product-item{
+    width: 220px;
+    height: 300px;
+    border: solid 1px darkgray;
+    background-color: silver;
+padding: 20px 0;
+text-align: center;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
