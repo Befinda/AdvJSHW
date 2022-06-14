@@ -22,6 +22,13 @@ class ProductList {
 
         }
     }
+    sumProductList() {
+        let s = 0;
+        this.goods.forEach(item => {
+            s += item.price;
+        })
+        alert(`Сумма выведенных товаров = ${s}`);
+    }
 }
 
 class ProductItem {
@@ -42,7 +49,7 @@ class ProductItem {
 }
 
 let list = new ProductList();
-
+list.sumProductList();
 
 class Cart {
     constructor() {
