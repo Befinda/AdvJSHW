@@ -14,7 +14,7 @@ header{
 display: block;
 
 }
-.products{
+.products, .cart{
     padding: 30px 150px;
     display: flex;
     justify-content: space-between;
@@ -29,4 +29,26 @@ text-align: center;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+}
+.cart{
+    flex-direction: column;
+row-gap: 30px;
+align-items: center;
+}
+.cart-item{
+width: 500px;
+height: 130px;
+border: solid 1px darkgray;
+background-color: silver;
+padding: 10px;
+text-align: center;
+display: flex;
+}
+.cart-item img{
+    display: block;
+    height: 130px;
+}
+.cart-item .descript{
+    text-align: center;
+    flex-grow: 1;
 }
