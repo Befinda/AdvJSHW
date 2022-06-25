@@ -10,16 +10,34 @@
 <body>
     <div id="app">
         <header>
-            <input type="text" class="goods-search" />
-            <button class="search-button" type="button">Искать</button>
-            <button class="btn-cart" type="button">Корзина</button>
+            <div class="logo">E-shop</div>
+            <div class="cart">
+                <form action="#" class="search-form">
+                    <input type="text" class="search-field" v-model="userSearch">
+                    <button class="btn-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <button class="btn-cart" type="button">Корзина</button>
+                <div class="cart-block invisible"></div>
+            </div>
         </header>
         <main>
-            <div class="products"></div>
+            <div class="products">
+                <div class="product-item" v-for="product of products" :key="product.id_product">
+                    <img :src="imgCatalog" alt="Some img">
+                    <div class="desc">
+                        <h3>{{product.product_name}}</h3>
+                        <p>{{product.price}} $</p>
+                        <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
+    <script src="https://kit.fontawesome.com/4c74d4fdd7.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script src="js/main.js"></script>
+    <script src="js/mainvue.js"></script>
 </body>
 
 </html>
