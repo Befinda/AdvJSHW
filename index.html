@@ -21,14 +21,8 @@
                 <button class="btn-cart" type="button"
                     @click="document.querySelector('.cart-block').classList.toggle('invisible');">Корзина</button>
                 <div class="cart-block invisible">
-                    <div class="cart-item" v-for="product of cartItems">
-                        <!--                         <img :src="imgCatalog+product.id_product" alt="Some img">
-                        <div class="desc">
-                            <h3>{{product.product_name}}</h3>
-                            <p>{{product.price}} $</p>
-                            <p>Quantity: {{product.quantity}}</p>
-                        </div> 
-                        <div class="cart-item" data-id="${this.id_product}">-->
+                    <div v-if="cartItems.length==0">Нет данных</div>
+                    <div class="cart-item" v-else v-for="product of cartItems" :id="product.id_product">
                         <div class="product-bio">
                             <img :src="imgCatalog+product.id_product" alt="Some image">
                             <div class="product-desc">
@@ -37,12 +31,13 @@
                                 <p class="product-single-price">{{product.price}} $</p>
                             </div>
                         </div>
-                        <!--<div class="right-block">
-                            <p class="product-price">$${this.quantity*this.price}</p>
-                            <button class="del-btn" data-id="${this.id_product}">&times;</button>
-                        </div>-->
+                        <div class="right-block">
+                            <p class="product-price">{{product.price*product.quantity}} $</p>
+                            <button class="del-btn" @click="removeProduct(product)">&times;</button>
+                        </div>
 
                     </div>
+
                 </div>
         </header>
         <main>

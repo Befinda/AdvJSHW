@@ -25,9 +25,19 @@ const app = new Vue({
             console.log(this.filtered);
         },
         addProduct(product) {
-            this.$set(product, 'quantity', 1);
-            this.cartItems.push(product);
-            console.log(product);
+            if (this.cartItems.includes(product)) {
+                product.quantity++;
+            } else {
+                this.$set(product, 'quantity', 1);
+                this.cartItems.push(product);
+            }
+        },
+        removeProduct(product) {
+            if (product.quantity > 1) {
+                product.quantity--;
+            } else {
+                this.cartItems.splice(this.cartItems.indexOf(product), 1);
+            }
         }
 
     },
