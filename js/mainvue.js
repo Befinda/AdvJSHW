@@ -6,6 +6,7 @@ const app = new Vue({
         catalogUrl: '/catalogData.json',
         products: [],
         filtered: [],
+        cartItems: [],
         imgCatalog: 'https://picsum.photos/220?random=',
         userSearch: '',
         show: false
@@ -24,7 +25,9 @@ const app = new Vue({
             console.log(this.filtered);
         },
         addProduct(product) {
-            console.log(product.id_product);
+            this.$set(product, 'quantity', 1);
+            this.cartItems.push(product);
+            console.log(product);
         }
 
     },
