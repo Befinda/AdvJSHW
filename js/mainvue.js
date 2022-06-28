@@ -9,7 +9,8 @@ const app = new Vue({
         cartItems: [],
         imgCatalog: 'https://picsum.photos/220?random=',
         userSearch: '',
-        show: false
+        showCart: false,
+        error: false
     },
     methods: {
         getJson(url) {
@@ -22,22 +23,32 @@ const app = new Vue({
         filter() {
             const regexp = new RegExp(this.userSearch, 'i');
             this.filtered = this.products.filter(product => regexp.test(product.product_name));
-            console.log(this.filtered);
+
         },
         addProduct(product) {
-            if (this.cartItems.includes(product)) {
-                product.quantity++;
-            } else {
-                this.$set(product, 'quantity', 1);
-                this.cartItems.push(product);
-            }
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                    if (data.result === 1) {
+                        if (this.cartItems.includes(product)) {
+                            product.quantity++;
+                        } else {
+                            this.$set(product, 'quantity', 1);
+                            this.cartItems.push(product);
+                        }
+                    }
+                });
         },
         removeProduct(product) {
-            if (product.quantity > 1) {
-                product.quantity--;
-            } else {
-                this.cartItems.splice(this.cartItems.indexOf(product), 1);
-            }
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                    if (data.result === 1) {
+                        if (product.quantity > 1) {
+                            product.quantity--;
+                        } else {
+                            this.cartItems.splice(this.cartItems.indexOf(product), 1);
+                        }
+                    }
+                });
         }
 
     },
@@ -45,9 +56,9 @@ const app = new Vue({
         this.getJson(`${API + this.catalogUrl}`)
             .then(data => {
                 for (let el of data) {
-                    this.products.push(el);
+                    this.$data.products.push(el);
                 }
-                this.filtered = this.products;
+                this.$data.filtered = this.$data.products;
             });
 
     }
