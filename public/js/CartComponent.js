@@ -36,7 +36,7 @@ Vue.component('cart', {
             }
         },
         removeProduct(product) {
-            this.getJson(`${API}/addToBasket.json`)
+            this.$parent.putJson(`/api/cart/${product.id_product}`)
                 .then(data => {
                     if (data.result === 1) {
                         if (product.quantity > 1) {
@@ -49,15 +49,16 @@ Vue.component('cart', {
         }
 
     },
-    template: `<div>
+    template: `<div >
     <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
             <div class="cart-block" v-show="showCart">
-                <cart-item v-for="item of cartItems" :key="item.id_product" :img="imgCart" :cart-item="item" @remove="remove">
+                <cart-item v-for="item of cartItems" :key="item.id_product" :img="imgCart" :cart-item="item" @remove="removeProduct">
                 </cart-item>
             </div>
             </div>
         `
 });
+//@remove="remove"
 
 Vue.component('cart-item', {
     props: ['cartItem'],
@@ -73,7 +74,7 @@ Vue.component('cart-item', {
                     </div>
                     <div class="right-block">
                         <div class="product-price">{{cartItem.quantity*cartItem.price}}</div>
-                        <button class="del-btn" @click="$root.removeProduct(cartItem)">&times;</button>
+                        <button class="del-btn" @click="$emit('remove', cartItem)">&times;</button>
                     </div>
                 </div>
     `

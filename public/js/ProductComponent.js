@@ -23,7 +23,7 @@ Vue.component('products', {
         }
     },
     template: `<div class="products">
-                 <product v-for="item of products" 
+                 <product v-for="item of filtered" 
                  :key="item.id_product" 
                  :product="item"                @add-product="$parent.$refs.cart.addProduct"></product>
                 </div>`
