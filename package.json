@@ -1,0 +1,25 @@
+{
+  "name": "AdvancedJSHW",
+  "version": "1.0.0",
+  "description": "Домашняя работа №4 отдельно от проекта",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Befinda/AdvJSHW.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Befinda/AdvJSHW/issues"
+  },
+  "homepage": "https://github.com/Befinda/AdvJSHW#readme",
+  "dependencies": {
+    "-": "0.0.1",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.18"
+  }
+}

@@ -15,12 +15,16 @@
 
                 <filtered></filtered>
 
-                <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
-                <cart :cart-items="cartItems" :visibility="showCart"></cart>
+                <!--<button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+                 <cart :cart-items="cartItems" :visibility="showCart"></cart>-->
+                <cart ref="cart"></cart>
 
         </header>
         <main>
-            <products :products="filtered" @add-product="addProduct"></products>
+            <!--             <products :products="filtered" @add-product="addProduct"></products>
+ -->
+            <error ref="error"></error>
+            <products ref="products"></products>
 
         </main>
     </div>
@@ -29,6 +33,7 @@
     <script src="js/ProductComponent.js"></script>
     <script src="js/CartComponent.js"></script>
     <script src="js/FilterComponent.js"></script>
+    <script src="js/ErrorComp.js"></script>
     <script src="js/mainvue.js"></script>
 </body>
 
