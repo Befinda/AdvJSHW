@@ -1,12 +1,62 @@
 Vue.component('cart', {
-    props: ['cartItems', 'visibility'],
-    template: `
-        <div class="cart-block" v-show="visibility">
-        <div v-if="cartItems.length==0">Нет данных</div>
-            <cart-item v-else v-for="item of cartItems" :key="item.id_product" :cart-item="item">
-            </cart-item>
-        </div>
-    `
+    data() {
+        return {
+            cartUrl: '/getBasket.json',
+            cartItems: [],
+            imgCart: 'https://placehold.it/50x100',
+            showCart: false
+        }
+    },
+    mounted() {
+        this.$parent.getJson(`/api/cart`)
+            .then(data => {
+                for (let item of data.contents) {
+                    this.$data.cartItems.push(item);
+                }
+            });
+    },
+    methods: {
+        addProduct(item) {
+            let find = this.cartItems.find(el => el.id_product === item.id_product);
+            if (find) {
+                this.$parent.putJson(`/api/cart/${find.id_product}`, { quantity: 1 })
+                    .then(data => {
+                        if (data.result === 1) {
+                            find.quantity++
+                        }
+                    })
+            } else {
+                const prod = Object.assign({ quantity: 1 }, item);
+                this.$parent.postJson(`/api/cart`, prod)
+                    .then(data => {
+                        if (data.result === 1) {
+                            this.cartItems.push(prod)
+                        }
+                    })
+            }
+        },
+        removeProduct(product) {
+            this.getJson(`${API}/addToBasket.json`)
+                .then(data => {
+                    if (data.result === 1) {
+                        if (product.quantity > 1) {
+                            product.quantity--;
+                        } else {
+                            this.cartItems.splice(this.cartItems.indexOf(product), 1);
+                        }
+                    }
+                });
+        }
+
+    },
+    template: `<div>
+    <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+            <div class="cart-block" v-show="showCart">
+                <cart-item v-for="item of cartItems" :key="item.id_product" :img="imgCart" :cart-item="item" @remove="remove">
+                </cart-item>
+            </div>
+            </div>
+        `
 });
 
 Vue.component('cart-item', {
