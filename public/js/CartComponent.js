@@ -65,7 +65,7 @@ Vue.component('cart-item', {
     template: `
     <div class="cart-item">
                     <div class="product-bio">
-                        <img :src="$root.imgCatalog+cartItem.id_product" alt="Some img">
+                        <img :src="'img/'+cartItem.id_product +'.jpg'" alt="Some img">
                         <div class="product-desc">
                             <div class="product-title">{{ cartItem.product_name }}</div>
                             <div class="product-quantity">Quantity: {{ cartItem.quantity }}</div>
